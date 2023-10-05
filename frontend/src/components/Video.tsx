@@ -13,10 +13,10 @@ function Video(props: videoProps) {
   }
 
   const SalvarAtual = () => {
+    localStorage.setItem("_id", props._id);
     localStorage.setItem("name", props.name);
     localStorage.setItem("description", props.description || "");
     localStorage.setItem("url", props.url);
-    localStorage.setItem("id", props._id);
     props.abrirOModal();
   };
 

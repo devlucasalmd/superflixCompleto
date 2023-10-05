@@ -23,7 +23,7 @@ function Videos() {
   },[])
 
   const createVideo = (name: string, description: string, url: string) => {
-    axios.post<{ video: videoProps }>('http://localhost:3001/videos/createVideo', { name, description, url })
+    axios.post<{ video: videoProps }>(`http://localhost:3001/videos/createVideo`, { name, description, url })
       .then((res) => {
         setVideos([...videos, res.data.video]);
       })
@@ -37,7 +37,7 @@ function Videos() {
   }
 
   const editVideo = (_id: string, name: string, description: string, url: string) => {
-    axios.put<{ video: videoProps }>(`http://localhost:3001/videos/editVideo/${_id}`, { name, description, url })
+    axios.put<{ video: videoProps }>(`http://localhost:3001/videos/editVideo/${_id}`, { _id, name, description, url })
       .then((res) => {
         const newUpdatedVideos = videos.map((v) => (v._id === _id ? res.data.video : v));
         setVideos(newUpdatedVideos);
@@ -49,14 +49,15 @@ function Videos() {
   return (
     <div>
        <h1>Videos inscritos</h1>
-       <AddNewButton abrirOModal={showModal} />
+       <AddNewButton abrirOModal={mudarModal} />
       {
         showModal ? <Modal EditarVideo={ editVideo } onCreateVideo={createVideo} fecharOModal={mudarModal} />
        : null
       }
       <div className='videos-div'>      
         {videos.map((v) => (
-            <Video deleteVideo={DELETED_VIDEO} abrirOModal={mudarModal} key={v._id} {...v} />
+          //  deleteVideo={DELETED_VIDEO} abrirOModal={mudarModal}
+            <Video key={v._id}{...v} />
           ))}
       </div>
     </div>        

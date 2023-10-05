@@ -4,7 +4,7 @@ import "./Button.css"
 
 interface AddNewButtonProps {
   abrirOModal: () => void;
-  showModal: boolean;
+  showModal?: boolean;
 }
 
 function AddNewButton(props: AddNewButtonProps) {
